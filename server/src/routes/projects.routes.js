@@ -9,8 +9,8 @@ const projectsRoutes = Router();
 
 projectsRoutes.get("/", getProjects);
 projectsRoutes.get("/:id", getProject);
-projectsRoutes.get("/update", updateProject);
-projectsRoutes.get("/delete", deleteProject);
-projectsRoutes.get("/create", createProject);
+projectsRoutes.put("/:id", updateProject);
+projectsRoutes.delete("/:id", deleteProject);
+projectsRoutes.post("/", createProject);
 
 export default projectsRoutes;

@@ -1,16 +1,22 @@
 import express from "express";
+import morgan from "morgan";
 import routes from "./routes/index.js";
 
 const app = express();
 
-// Define a middleware function
-// const myMiddleware = (req, res, next) => {
-//   // Do some processing or add functionality here
-//   console.log("Middleware executed");
-//   next(); // Call next() to move to the next middleware or route handler
-// };
-
-// app.use(myMiddleware); // Add the middleware to the application
+app.use(morgan("dev"));
+app.use(express.json());
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  res.header("X-Total-Count", "1000");
+  next();
+});
 
 app.use("/", routes);
 

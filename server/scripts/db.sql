@@ -23,6 +23,17 @@ CREATE TABLE IF NOT EXISTS tasks (
 
 );
 
+-- Drop the existing foreign key constraint
+ALTER TABLE tasks DROP FOREIGN KEY tasks_ibfk_1;
+
+-- Add a new foreign key constraint with ON DELETE CASCADE
+ALTER TABLE tasks
+ADD CONSTRAINT tasks_ibfk_1
+FOREIGN KEY (project_id)
+REFERENCES projects (id)
+ON DELETE CASCADE;
+
+
 -- Inserting projects
 INSERT INTO projects (name, description, start_date, end_date)
 VALUES

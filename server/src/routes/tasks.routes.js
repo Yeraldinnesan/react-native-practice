@@ -11,8 +11,8 @@ const tasksRoutes = Router();
 tasksRoutes.get("/", getTasks);
 tasksRoutes.get("/count", getTaskCount);
 tasksRoutes.get("/:id", getTask);
-tasksRoutes.post("/tasks", createTask);
-tasksRoutes.delete("/tasks", deleteTask);
-tasksRoutes.put("/tasks", updateTask);
+tasksRoutes.post("/", createTask);
+tasksRoutes.delete("/:id", deleteTask);
+tasksRoutes.put("/:id", updateTask);
 
 export default tasksRoutes;
