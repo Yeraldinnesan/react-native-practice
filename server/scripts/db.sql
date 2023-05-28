@@ -5,7 +5,7 @@ USE projectmanagerdb;
 -- PROJECTS TABLE
 CREATE TABLE IF NOT EXISTS projects (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     description TEXT,
     start_date DATE,
     end_date DATE,
