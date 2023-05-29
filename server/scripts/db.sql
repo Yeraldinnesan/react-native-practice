@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS projects (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description TEXT,
-    start_date DATE,
-    end_date DATE,
+    start_date DATETIME,
+    end_date DATETIME,
 );
 
 -- TASKS TABLE
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS tasks (
     project_id INT,
     title VARCHAR(100) NOT NULL,
     description TEXT,
-    due_date DATE,
+    due_date DATETIME,
     status VARCHAR(20),
     FOREIGN KEY (project_id) REFERENCES projects(id)
 
@@ -32,6 +32,8 @@ ADD CONSTRAINT tasks_ibfk_1
 FOREIGN KEY (project_id)
 REFERENCES projects (id)
 ON DELETE CASCADE;
+
+
 
 
 -- Inserting projects

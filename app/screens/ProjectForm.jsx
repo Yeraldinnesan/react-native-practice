@@ -36,7 +36,7 @@ const ProjectForm = ({ navigation }) => {
         toggleDatePicker();
         setFormData({
           ...formData,
-          ["end_date"]: currentDate.toDateString(),
+          ["end_date"]: currentDate,
         });
       }
     } else {
@@ -60,10 +60,14 @@ const ProjectForm = ({ navigation }) => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = () => {
-    addProject(formData);
-    navigation.navigate("Home");
-    console.log(formData);
+  const handleSubmit = async () => {
+    try {
+      await addProject(formData);
+      navigation.navigate("Home");
+      console.log(formData);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const cancelIOSDate = () => {
@@ -111,7 +115,7 @@ const ProjectForm = ({ navigation }) => {
       )}
 
       {!showDatePicker && (
-        <Pressable onPress={toggleDatePicker}>
+        <Pressable style={{ width: "90%" }} onPress={toggleDatePicker}>
           <TextInput
             style={styles.input}
             placeholder="Select an end date"
