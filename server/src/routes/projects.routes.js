@@ -4,6 +4,7 @@ import { deleteProject } from "../controllers/projects/deleteProject";
 import { updateProject } from "../controllers/projects/updateProject";
 import { createProject } from "../controllers/projects/createProject";
 import { getProjects } from "../controllers/projects/getProjects";
+import { getProjectTasks } from "../controllers/projects/getProjectTasks";
 
 const projectsRoutes = Router();
 
@@ -23,6 +24,20 @@ const projectsRoutes = Router();
  */
 projectsRoutes.get("/", getProjects);
 
+/**
+ * @swagger
+ * /projects/{id}/tasks:
+ *   get:
+ *     summary: Get a Project's tasks
+ *     tags: [Projects]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ */
+projectsRoutes.get("/:id/tasks", getProjectTasks);
 /**
  * @swagger
  * /projects/{id}:
