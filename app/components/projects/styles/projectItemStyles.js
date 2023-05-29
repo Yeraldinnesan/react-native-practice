@@ -22,8 +22,13 @@ export const styles = StyleSheet.create({
   },
   itemStartDate: {
     color: "#ACB1D6",
-    fontSize: 12,
-    padding: 2,
+    fontSize: 10,
+    paddingTop: 3,
+  },
+  itemEndDate: {
+    color: "#ACB1D6",
+    fontSize: 10,
+    paddingLeft: 2,
   },
   deleteButton: {
     backgroundColor: "#96031a",
