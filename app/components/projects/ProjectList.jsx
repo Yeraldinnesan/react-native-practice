@@ -1,11 +1,32 @@
 import { FlatList, Text } from "react-native";
-import React from "react";
+import { useEffect, useState } from "react";
 
-const ProjectList = ({ projects }) => {
+import { getProjects } from "../../api";
+import ProjectItem from "./ProjectItem";
+
+import { styles } from "./styles/projectListStyles";
+
+const ProjectList = () => {
+  const [projects, setProjects] = useState([]);
+
+  const fetchProjects = async () => {
+    const data = await getProjects();
+    setProjects(data);
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const renderItem = ({ item }) => <ProjectItem project={item} />;
+
+  console.log(projects);
   return (
     <FlatList
+      style={styles.flatList}
       data={projects}
-      renderItem={({ item }) => <Text>{item.name}</Text>}
+      keyExtractor={(item) => item.id + ""}
+      renderItem={renderItem}
     />
   );
 };
