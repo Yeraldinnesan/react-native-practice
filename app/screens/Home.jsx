@@ -1,26 +1,13 @@
-import { useEffect, useState } from "react";
-import { getProjects } from "../api";
-
 import ProjectList from "../components/projects/ProjectList";
 
-import { View, Text, FlatList } from "react-native";
+import { View } from "react-native";
+import Layout from "../components/Layout";
 
 const Home = () => {
-  const [projects, setProjects] = useState([]);
-
-  const fetchProjects = async () => {
-    const data = await getProjects();
-    setProjects(data);
-  };
-
-  useEffect(() => {
-    fetchProjects();
-  }, []);
-
   return (
-    <View>
-      <ProjectList projects={projects} />
-    </View>
+    <Layout>
+      <ProjectList />
+    </Layout>
   );
 };
 
