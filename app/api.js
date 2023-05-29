@@ -19,14 +19,8 @@ export const addProject = async (newProject) => {
   try {
     const formattedProject = {
       ...newProject,
-      start_date: new Date(newProject.start_date)
-        .toISOString()
-        .slice(0, 19)
-        .replace("T", " "),
-      end_date: new Date(newProject.end_date)
-        .toISOString()
-        .slice(0, 19)
-        .replace("T", " "),
+      start_date: new Date(newProject.start_date).toISOString(),
+      end_date: new Date(newProject.end_date).toISOString(),
     };
     const { data } = await axios.post(API, formattedProject, {
       headers: {
@@ -45,3 +39,9 @@ export const addProject = async (newProject) => {
 //   const res = await fetch(API, {method:'POST', headers: {Accept: "application/json", 'Content-type': "application/json"}, body: JSON.stringify(newProject)})
 //   return await res.json()
 // }
+
+export const deleteProject = async (id) => {
+  await axios.delete(`${API}/${id}`, {
+    method: "DELETE",
+  });
+};
