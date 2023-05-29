@@ -1,5 +1,4 @@
 import { View, StyleSheet, StatusBar } from "react-native";
-import React from "react";
 
 const Layout = ({ children }) => {
   return (

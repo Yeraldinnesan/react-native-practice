@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 
 const API = "http://localhost:3000/projects";
 
@@ -15,12 +16,23 @@ export const getProjects = async () => {
   }
 };
 
+export const getProject = async (id) => {
+  try {
+    const { data } = await axios(`${API}/${id}`);
+    console.log("Response data:", data);
+    return data[0];
+  } catch (error) {
+    console.error("Error fetching project:", error);
+    throw error;
+  }
+};
+
 export const addProject = async (newProject) => {
   try {
     const formattedProject = {
       ...newProject,
-      start_date: new Date(newProject.start_date).toISOString(),
-      end_date: new Date(newProject.end_date).toISOString(),
+      start_date: moment(newProject.start_date).format("YYYY-MM-DD HH:mm:ss"),
+      end_date: moment(newProject.end_date).format("YYYY-MM-DD HH:mm:ss"),
     };
     const { data } = await axios.post(API, formattedProject, {
       headers: {
@@ -41,7 +53,6 @@ export const addProject = async (newProject) => {
 // }
 
 export const deleteProject = async (id) => {
-  await axios.delete(`${API}/${id}`, {
-    method: "DELETE",
-  });
+  console.log(id);
+  await axios.delete(`${API}/${id}`);
 };
