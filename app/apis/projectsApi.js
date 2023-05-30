@@ -19,11 +19,21 @@ export const getProjects = async () => {
 export const getProject = async (id) => {
   try {
     const { data } = await axios(`${API}/${id}`);
-    console.log("Response data:", data);
+    // console.log("Response data:", data);
     return data[0];
   } catch (error) {
     console.error("Error fetching project:", error);
     throw error;
+  }
+};
+
+export const getProjectTasks = async (id) => {
+  try {
+    const { data } = await axios(`${API}/${id}/tasks`);
+    console.log("get tasks", data);
+    return data;
+  } catch (error) {
+    console.error(error);
   }
 };
 
@@ -64,11 +74,11 @@ export const updateProject = async (id, updatedProject) => {
       },
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
 export const deleteProject = async (id) => {
-  console.log(id);
+  // console.log(id);
   await axios.delete(`${API}/${id}`);
 };

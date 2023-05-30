@@ -4,6 +4,7 @@ import { TouchableOpacity, Text } from "react-native";
 
 import Home from "./screens/Home";
 import ProjectForm from "./screens/ProjectForm";
+import ProjectTasks from "./screens/ProjectTasks";
 
 import { styles } from "./styles/headerStyles";
 
@@ -33,6 +34,15 @@ const App = () => {
           component={ProjectForm}
           options={() => ({
             title: "New Project",
+            headerStyle: { backgroundColor: "#212A3E" },
+            headerTitleStyle: { color: "#F1F6F9" },
+          })}
+        />
+        <Stack.Screen
+          name="ProjectTasks"
+          component={ProjectTasks}
+          options={() => ({
+            title: "Project",
             headerStyle: { backgroundColor: "#212A3E" },
             headerTitleStyle: { color: "#F1F6F9" },
           })}

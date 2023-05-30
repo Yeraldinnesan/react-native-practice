@@ -11,7 +11,9 @@ const ProjectItem = ({ project, deleteHandler }) => {
 
   return (
     <View style={styles.itemContainer}>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("ProjectTasks", { id: project.id })}
+      >
         <Text style={styles.itemTitle}> {project.name} </Text>
         <Text style={styles.itemDescription}> {project.description} </Text>
         <Text style={styles.itemStartDate}> started {formatedDate} </Text>
