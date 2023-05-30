@@ -47,10 +47,26 @@ export const addProject = async (newProject) => {
   }
 };
 
-// export const addProject = async (newProject) => {
-//   const res = await fetch(API, {method:'POST', headers: {Accept: "application/json", 'Content-type': "application/json"}, body: JSON.stringify(newProject)})
-//   return await res.json()
-// }
+export const updateProject = async (id, updatedProject) => {
+  try {
+    const formattedProject = {
+      ...updatedProject,
+      start_date: moment(updatedProject.start_date).format(
+        "YYYY-MM-DD HH:mm:ss"
+      ),
+      end_date: moment(updatedProject.end_date).format("YYYY-MM-DD HH:mm:ss"),
+    };
+    await axios.put(`${API}/${id}`, formattedProject, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const deleteProject = async (id) => {
   console.log(id);

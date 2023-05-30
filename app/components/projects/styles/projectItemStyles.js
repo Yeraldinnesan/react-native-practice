@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
   editButton: {
-    backgroundColor: "#04724d",
+    backgroundColor: "#49BEB7",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
