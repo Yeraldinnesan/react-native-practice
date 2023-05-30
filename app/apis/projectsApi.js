@@ -57,6 +57,25 @@ export const addProject = async (newProject) => {
   }
 };
 
+export const addProjectTask = async (id, newTask) => {
+  try {
+    const formatedTask = {
+      ...newTask,
+      due_date: moment(newTask.due_date).format("YYYY-MM-DD HH:mm:ss"),
+    };
+    const { data } = await axios.post(`${API}/${id}/tasks`, formatedTask, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    return data;
+  } catch (error) {
+    log.error(error);
+  }
+};
+
 export const updateProject = async (id, updatedProject) => {
   try {
     const formattedProject = {

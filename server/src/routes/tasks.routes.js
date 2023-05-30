@@ -2,7 +2,6 @@ import { Router } from "express";
 import { getTasks } from "../controllers/tasks/getTasks.js";
 import { getTaskCount } from "../controllers/tasks/getTaskCount.js";
 import { getTask } from "../controllers/tasks/getTask.js";
-import { createTask } from "../controllers/tasks/createTask.js";
 import { deleteTask } from "../controllers/tasks/deleteTask.js";
 import { updateTask } from "../controllers/tasks/updateTask.js";
 
@@ -47,15 +46,6 @@ tasksRoutes.get("/count", getTaskCount);
  *         required: true
  */
 tasksRoutes.get("/:id", getTask);
-
-/**
- * @swagger
- * /tasks:
- *   post:
- *     summary: Create a Task
- *     tags: [Tasks]
- */
-tasksRoutes.post("/", createTask);
 
 /**
  * @swagger

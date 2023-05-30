@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import { styles } from "../components/projects/styles/projectListStyles";
 
 import { getProjectTasks } from "../apis/projectsApi";
+import { deleteTask } from "../apis/tasksApi";
 import TaskItem from "../components/tasks/TaskItem";
 
 const ProjectTasks = ({ route }) => {
@@ -22,8 +23,6 @@ const ProjectTasks = ({ route }) => {
     fetchProjectsTasks();
   }, []);
 
-  const renderItem = ({ item }) => <TaskItem task={item} />;
-
   //-------------------
 
   const [refreshing, setRefreshing] = useState(false);
@@ -35,6 +34,15 @@ const ProjectTasks = ({ route }) => {
   });
 
   //-------------------
+
+  const deleteHandler = async (id) => {
+    await deleteTask(id);
+    await fetchProjectsTasks();
+  };
+
+  const renderItem = ({ item }) => (
+    <TaskItem deleteHandler={deleteHandler} task={item} />
+  );
   return (
     <Layout>
       <FlatList

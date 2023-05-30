@@ -5,6 +5,7 @@ import { TouchableOpacity, Text } from "react-native";
 import Home from "./screens/Home";
 import ProjectForm from "./screens/ProjectForm";
 import ProjectTasks from "./screens/ProjectTasks";
+import TaskForm from "./screens/TaskForm";
 
 import { styles } from "./styles/headerStyles";
 
@@ -41,8 +42,22 @@ const App = () => {
         <Stack.Screen
           name="ProjectTasks"
           component={ProjectTasks}
+          options={({ navigation }) => ({
+            title: "Project's Tasks",
+            headerStyle: { backgroundColor: "#212A3E" },
+            headerTitleStyle: { color: "#F1F6F9" },
+            headerRight: () => (
+              <TouchableOpacity onPress={() => navigation.navigate("TaskForm")}>
+                <Text style={styles.navigation}>Add</Text>
+              </TouchableOpacity>
+            ),
+          })}
+        />
+        <Stack.Screen
+          name="TaskForm"
+          component={TaskForm}
           options={() => ({
-            title: "Project",
+            title: "Add Task",
             headerStyle: { backgroundColor: "#212A3E" },
             headerTitleStyle: { color: "#F1F6F9" },
           })}
