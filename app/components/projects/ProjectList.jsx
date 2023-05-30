@@ -5,11 +5,14 @@ import { getProjects, deleteProject } from "../../api";
 import ProjectItem from "./ProjectItem";
 
 import { styles } from "./styles/projectListStyles";
+import { useIsFocused } from "@react-navigation/native";
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
 
   const [refreshing, setRefreshing] = useState(false);
+
+  const isFocused = useIsFocused();
 
   const fetchProjects = async () => {
     const data = await getProjects();
@@ -17,8 +20,9 @@ const ProjectList = () => {
   };
 
   useEffect(() => {
+    console.log(isFocused);
     fetchProjects();
-  }, []);
+  }, [isFocused]);
 
   const deleteHandler = async (id) => {
     await deleteProject(id);

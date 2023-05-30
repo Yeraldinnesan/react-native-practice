@@ -11,7 +11,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import Layout from "../components/Layout";
 
 import { styles } from "../styles/projectFormStyles";
-import { addProject, getProject } from "../api";
+import { addProject, getProject, updateProject } from "../api";
 import moment from "moment";
 
 const ProjectForm = ({ navigation, route }) => {
@@ -22,6 +22,8 @@ const ProjectForm = ({ navigation, route }) => {
     end_date: new Date(),
   });
 
+  const [editing, setEditing] = useState(false);
+
   console.log(route.params);
 
   useEffect(() => {
@@ -31,7 +33,6 @@ const ProjectForm = ({ navigation, route }) => {
         try {
           const project = await getProject(route.params.id);
           console.log("Fetched project:", project);
-          // Convert the start_date and end_date to Date objects
           const startDate = moment(project.start_date).toDate();
           const endDate = moment(project.end_date).toDate();
 
@@ -42,6 +43,7 @@ const ProjectForm = ({ navigation, route }) => {
             start_date: startDate,
             end_date: endDate,
           }));
+          setEditing(true);
         } catch (error) {
           console.log(error);
         }
@@ -92,21 +94,24 @@ const ProjectForm = ({ navigation, route }) => {
   const handleChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
   };
+
   const handleSubmit = async () => {
     try {
-      console.log(formData); // Check if formData is properly populated
+      if (!editing) {
+        // console.log(formData); // Check if formData is properly populated
 
-      // Check if required fields exist and have valid values
-      if (!formData.name || !formData.description) {
-        throw new Error("Please fill in all the required fields.");
+        if (!formData.name || !formData.description) {
+          throw new Error("Please fill in all the required fields.");
+        }
+
+        await addProject(formData);
+        // console.log(formData);
+      } else {
+        await updateProject(route.params.id, formData);
       }
-
-      await addProject(formData);
       navigation.navigate("Home");
-      console.log(formData);
     } catch (error) {
       console.log(error);
-      // Handle the error appropriately (e.g., display an error message)
     }
   };
   const cancelIOSDate = () => {
@@ -167,10 +172,15 @@ const ProjectForm = ({ navigation, route }) => {
           />
         </Pressable>
       )}
-
-      <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Add Project</Text>
-      </TouchableOpacity>
+      {!editing ? (
+        <TouchableOpacity style={styles.addButton} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Add Project</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity style={styles.updateButton} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Update Project</Text>
+        </TouchableOpacity>
+      )}
     </Layout>
   );
 };
