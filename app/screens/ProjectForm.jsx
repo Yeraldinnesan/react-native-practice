@@ -11,7 +11,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import Layout from "../components/Layout";
 
 import { styles } from "../styles/projectFormStyles";
-import { addProject, getProject, updateProject } from "../api";
+import { addProject, getProject, updateProject } from "../apis/projectsApi";
 import moment from "moment";
 
 const ProjectForm = ({ navigation, route }) => {

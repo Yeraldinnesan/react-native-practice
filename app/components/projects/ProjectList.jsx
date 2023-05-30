@@ -1,7 +1,7 @@
 import { FlatList, RefreshControl, Text } from "react-native";
 import { useCallback, useEffect, useState } from "react";
 
-import { getProjects, deleteProject } from "../../api";
+import { getProjects, deleteProject } from "../../apis/projectsApi";
 import ProjectItem from "./ProjectItem";
 
 import { styles } from "./styles/projectListStyles";
